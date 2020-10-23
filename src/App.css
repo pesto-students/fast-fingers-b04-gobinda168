@@ -1,38 +1,83 @@
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+}
+.bg {
+  background-image: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.981127485173757) 36%,
+      rgba(0, 67, 93, 0.9) 100%
+    ),
+    url("/assets/images/Group 243.png");
+
+  background-size: cover;
+  height: 100vh;
 }
 
-.App-link {
-  color: #61dafb;
+.Icon-awesome-keyboard {
+  margin-top: 15vh;
+  width: 15vw;
+  height: 14vh;
+  object-fit: contain;
+  opacity: 0.64;
+  background-color: var(--light-red);
+}
+.Group-243 {
+  width: 1920px;
+  height: 1080px;
+  object-fit: contain;
+  opacity: 0.49;
+}
+.text-color {
+  color: #ff5155;
+}
+.row {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 1vh;
+}
+.line {
+  margin: 1.4vh 2vw 0 2vw;
+  width: 125.6px;
+  height: 0;
+  border: solid 2px #ff5155;
+}
+.input-field-name {
+  width: 32vw;
+  height: 6vh;
+  margin: 1vw;
+  padding-left: 1vw;
+  opacity: 0.59;
+  border-radius: 15px;
+  box-shadow: 0 3px 16px 0 rgba(0, 0, 0, 0.8);
+  background-color: #ffffff;
+  font-size: 20px;
+}
+.input-field-difficulty {
+  width: 33vw;
+  height: 6vh;
+  padding-left: 1vw;
+  opacity: 0.59;
+  border-radius: 15px;
+  box-shadow: 0 3px 16px 0 rgba(0, 0, 0, 0.8);
+  border: solid 1px #ffffff;
+  background-color: transparent;
+  font-size: 20px;
+}
+.input-field-name:focus {
+  outline: none;
+}
+.input-field-difficulty:focus {
+  outline: none;
+}
+.input-field-name::placeholder {
+  font-size: 20px;
+  font-weight: normal;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.start-game {
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 5vh;
 }
