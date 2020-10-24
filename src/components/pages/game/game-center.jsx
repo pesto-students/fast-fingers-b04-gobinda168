@@ -3,10 +3,20 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { AppContext } from "../../../context/AppContext";
 import dictionary from "../../../data/dictionary.json";
+import { GameOver } from "../Result/result";
+import { GameCounter } from "./game-counter";
 export const GameCenter = () => {
-  //timer states
-  const [microSeconds, setMicroSeconds] = useState(0);
-  const [seconds, setSeconds] = useState(0);
+  //to store user's scores
+  const {
+    // userCurrentScore,
+    // userScores,
+    // setUserScores,
+    currentUser,
+    setCurrentUser,
+    gameOver,
+    setMicroSeconds,
+    setSeconds,
+  } = useContext(AppContext);
 
   //store the status of fetch
   const [fetchWord, setFetchWord] = useState(true);
@@ -16,38 +26,25 @@ export const GameCenter = () => {
 
   //stores user input
   const [currentLetter, setCurrentLetter] = useState(null);
-  //   const [totalScore, setTotalScore] = useState(0);
 
-  //to store user's scores
-  const {
-    userCurrentScore,
-    setUserCurrentScore,
-    userScores,
-    setUserScores,
-  } = useContext(AppContext);
+  //calculate total time elapsed
+  const [timer, setTimer] = useState(0);
 
   //get random word from the dictionary using Math.random()
   const getWord = () => {
-    const max = dictionary.length;
+    const newDictionary = dictionary.filter((word) => {
+      if (currentUser.difficulty < 1.5) return word.length <= 4;
+      if (currentUser.difficulty < 2)
+        return word.length <= 8 && word.length >= 5;
+      return word.length > 8;
+    });
+    const max = newDictionary.length;
+
     const randomWord = Math.floor(Math.random() * Math.floor(max));
-    // console.log(dictionary.slice(0, 10));
-    return dictionary[randomWord].toUpperCase();
+
+    return newDictionary[randomWord].toUpperCase();
   };
 
-  //to control the timer
-  useEffect(() => {
-    let myInterval = setInterval(() => {
-      setMicroSeconds(microSeconds + 1);
-      if (microSeconds === 10) {
-        setUserCurrentScore(userCurrentScore + microSeconds);
-        setSeconds(seconds + 1);
-        setMicroSeconds(0);
-      }
-    }, 100);
-    return () => {
-      clearInterval(myInterval);
-    };
-  });
   //to fetched the random word
   useEffect(() => {
     if (fetchWord) {
@@ -61,7 +58,14 @@ export const GameCenter = () => {
     ) {
       setFetchWord(true);
       setCurrentLetter(null);
-      setUserScores([...userScores, userCurrentScore]);
+      //   setUserScores([...userScores, userCurrentScore]);
+      setCurrentUser({
+        ...currentUser,
+        difficulty: currentUser.difficulty + 0.01,
+      });
+      setSeconds(0);
+      setMicroSeconds(0);
+      setTimer(0);
     }
     // eslint-disable-next-line
   }, [fetchWord, currentLetter]);
@@ -85,37 +89,32 @@ export const GameCenter = () => {
 
   return (
     <div className="center">
-      <div style={style}>
-        <div className="timer">{`${seconds}:${
-          microSeconds < 10 ? "0" + microSeconds : microSeconds
-        }`}</div>
-      </div>
-      <div className="game-word">
-        {fetchedWord &&
-          [...fetchedWord].map((letter, i) => (
-            <h1 style={{ color: color(i, letter) }} key={i}>
-              {letter}
-            </h1>
-          ))}
-      </div>
-      <input
-        type="text"
-        className="word-input"
-        value={currentLetter || ""}
-        onChange={(e) => handleWordInput(e)}
-      />
+      {!gameOver ? (
+        <>
+          <GameCounter
+            word={fetchedWord}
+            difficulty={currentUser.difficulty}
+            timer={timer}
+            setTimer={setTimer}
+          />
+          <div className="game-word">
+            {fetchedWord &&
+              [...fetchedWord].map((letter, i) => (
+                <h1 style={{ color: color(i, letter) }} key={i}>
+                  {letter}
+                </h1>
+              ))}
+          </div>
+          <input
+            type="text"
+            className="word-input"
+            value={currentLetter || ""}
+            onChange={(e) => handleWordInput(e)}
+          />
+        </>
+      ) : (
+        <GameOver />
+      )}
     </div>
   );
-};
-
-const style = {
-  width: "10vw",
-  height: "20vh",
-  border: "14px solid white",
-
-  borderRadius: "100px",
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-  color: "white",
 };

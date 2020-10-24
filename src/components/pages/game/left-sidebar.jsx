@@ -1,10 +1,15 @@
 import React from "react";
 import { useContext } from "react";
 import { AppContext } from "../../../context/AppContext";
+import { mapDifficulty } from "../../common/map-difficulty";
 
-export const GameLeft = ({ resultScreen = true }) => {
-  const { currentUser, currentDifficulty } = useContext(AppContext);
-  const stopGame = () => {};
+export const GameLeft = () => {
+  const { currentUser, gameOver, setGameOver } = useContext(AppContext);
+
+  //stop the game
+  const stopGame = () => {
+    setGameOver(true);
+  };
 
   return (
     <div className="text-color left">
@@ -15,10 +20,10 @@ export const GameLeft = ({ resultScreen = true }) => {
         </div>
         <div className="level">
           <img src="/assets/images/game.svg" alt="game" width="25vw" />
-          <h3>LEVEL : {currentDifficulty.toUpperCase()}</h3>
+          <h3>LEVEL : {mapDifficulty(currentUser.difficulty).toUpperCase()}</h3>
         </div>
       </div>
-      {resultScreen && (
+      {!gameOver && (
         <div className="score-board">
           <div className="text-color title">SCORE BOARD</div>
           <div className="scores">
@@ -29,9 +34,9 @@ export const GameLeft = ({ resultScreen = true }) => {
       )}
       <div className="stop" onClick={stopGame}>
         <div className="game-left-stop">
-          {resultScreen && <img src="/assets/images/close.svg" alt="close" />}
+          {!gameOver && <img src="/assets/images/close.svg" alt="close" />}
 
-          <h2>{resultScreen ? "STOP GAME" : "QUIT"}</h2>
+          <h2>{!gameOver ? "STOP GAME" : "QUIT"}</h2>
         </div>
       </div>
     </div>

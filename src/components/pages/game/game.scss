@@ -115,3 +115,31 @@
 .game-page .center > * {
   margin: 2vw;
 }
+.game-over {
+  margin-left: 0;
+  .highscore {
+    font-size: 2vw;
+  }
+  .text-color-white {
+    color: white;
+    font-size: 3vw;
+    text-align: center;
+  }
+  .play-again {
+    .game-center-reload {
+      display: flex;
+      flex-direction: row;
+      color: #ff5155;
+      justify-content: center;
+      margin-top: 4vh;
+      // align-items: center;
+      // position: absolute;
+      // bottom: 0;
+      // margin-bottom: 10vh;
+      img {
+        margin-right: 1vw;
+        width: 2vw;
+      }
+    }
+  }
+}
