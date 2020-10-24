@@ -20,6 +20,8 @@ export const AppProvider = (props) => {
         : 2,
   });
   const [userScores, setUserScores] = useState([]);
+  const [userCurrentScore, setUserCurrentScore] = useState(0);
+
   return (
     <AppContext.Provider
       value={{
@@ -30,6 +32,8 @@ export const AppProvider = (props) => {
         setCurrentUser,
         userScores,
         setUserScores,
+        userCurrentScore,
+        setUserCurrentScore,
       }}
     >
       {props.children}
