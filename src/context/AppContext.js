@@ -17,26 +17,25 @@ export const AppProvider = (props) => {
     name: localStorage.getItem("user")
       ? JSON.parse(localStorage.getItem("user")).name
       : "",
-    difficulty:
-      currentDifficulty === "easy"
-        ? 1
-        : currentDifficulty === "medium"
-        ? 1.5
-        : 2,
+    difficulty: localStorage.getItem("user")
+      ? JSON.parse(localStorage.getItem("user")).difficulty
+      : 1,
   });
 
   //store the userscores and maintain it in local storage
   const [userScores, setUserScores] = useState(
-    JSON.parse(localStorage.getItem("scores")) || [0]
-  );
-
-  //store the highest score
-  const [newHighScore, setNewHighScore] = useState(
-    userScores.length === 1 ? 0 : userScores.sort((a, b) => b - a)[0]
+    JSON.parse(localStorage.getItem("scores")) || []
   );
 
   //store the score for for the current game
   const [userCurrentScore, setUserCurrentScore] = useState(0);
+
+  //store the highest score
+  const [newHighScore, setNewHighScore] = useState(
+    (localStorage.getItem("highscore") &&
+      JSON.parse(localStorage.getItem("highscore"))) ||
+      0
+  );
 
   //State to control gameover
   const [gameOver, setGameOver] = useState(false);
@@ -44,6 +43,13 @@ export const AppProvider = (props) => {
   //timer states
   const [microSeconds, setMicroSeconds] = useState(0);
   const [seconds, setSeconds] = useState(0);
+
+  //game timer
+  const [gameTimer, setGameTimer] = useState(0);
+  const [gameOverStatus, setGameOverStatus] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const [pathCovered, setPathCovered] = useState(null);
+  const [offset, setOffset] = useState(0);
 
   return (
     <AppContext.Provider
@@ -65,6 +71,16 @@ export const AppProvider = (props) => {
         setMicroSeconds,
         seconds,
         setSeconds,
+        gameTimer,
+        setGameTimer,
+        gameOverStatus,
+        setGameOverStatus,
+        progress,
+        setProgress,
+        pathCovered,
+        setPathCovered,
+        offset,
+        setOffset,
       }}
     >
       {props.children}

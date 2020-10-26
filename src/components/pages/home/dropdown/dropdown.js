@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import { AppContext } from "../../../../context/AppContext";
+import { reverseMapDifficulty } from "../../../common/map-difficulty";
 import "./dropdown.css";
 export const Dropdown = () => {
   const [dropdownVisibility, setDropdownVisibility] = useState(false);
@@ -7,12 +8,18 @@ export const Dropdown = () => {
     difficultyLevel,
     setCurrentDifficulty,
     currentDifficulty,
+    currentUser,
+    setCurrentUser,
   } = useContext(AppContext);
 
   const selectDifficulty = (difficulty) => {
     setDropdownVisibility(false);
     setCurrentDifficulty(difficulty);
     localStorage.setItem("difficulty", JSON.stringify(difficulty));
+    setCurrentUser({
+      ...currentUser,
+      difficulty: reverseMapDifficulty(difficulty),
+    });
   };
 
   return (

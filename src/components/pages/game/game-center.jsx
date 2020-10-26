@@ -8,7 +8,6 @@ import { GameCounter } from "./game-counter";
 export const GameCenter = () => {
   //to store user's scores
   const {
-    // userCurrentScore,
     // userScores,
     // setUserScores,
     currentUser,
@@ -16,6 +15,14 @@ export const GameCenter = () => {
     gameOver,
     setMicroSeconds,
     setSeconds,
+    gameTimer,
+    userScores,
+    setUserScores,
+    gameOverStatus,
+    setGameOverStatus,
+    setProgress,
+    setPathCovered,
+    setOffset,
   } = useContext(AppContext);
 
   //store the status of fetch
@@ -56,9 +63,13 @@ export const GameCenter = () => {
       fetchedWord &&
       currentLetter.toLowerCase() === fetchedWord.toLowerCase()
     ) {
+      setPathCovered(null);
+      setProgress(0);
+      setOffset(0);
       setFetchWord(true);
       setCurrentLetter(null);
       //   setUserScores([...userScores, userCurrentScore]);
+      // setProgress(10);
       setCurrentUser({
         ...currentUser,
         difficulty: currentUser.difficulty + 0.01,
@@ -87,6 +98,17 @@ export const GameCenter = () => {
     setCurrentLetter(e.target.value);
   };
 
+  useEffect(() => {
+    //storing game scores
+    if (gameOverStatus) {
+      setUserScores([...userScores, gameTimer]);
+      localStorage.setItem(
+        "scores",
+        JSON.stringify([...userScores, gameTimer])
+      );
+      setGameOverStatus(false);
+    }
+  }, [gameOverStatus, setGameOverStatus, userScores, gameTimer, setUserScores]);
   return (
     <div className="center">
       {!gameOver ? (

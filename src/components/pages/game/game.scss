@@ -70,12 +70,16 @@
       padding-bottom: 3vh;
     }
     .scores {
-      > li {
-        list-style: none;
-        padding-left: 0.4vw;
-        padding-bottom: 0.7vh;
-        color: #fff;
-        opacity: 0.8;
+      height: 45vh;
+      overflow-y: scroll;
+      .score {
+        > li {
+          list-style: none;
+          padding-left: 0.4vw;
+          padding-bottom: 0.7vh;
+          color: #fff;
+          opacity: 0.8;
+        }
       }
     }
   }

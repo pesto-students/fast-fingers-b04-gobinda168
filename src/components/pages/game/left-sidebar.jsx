@@ -2,13 +2,22 @@ import React from "react";
 import { useContext } from "react";
 import { AppContext } from "../../../context/AppContext";
 import { mapDifficulty } from "../../common/map-difficulty";
+import { GameScoreBoard } from "./game-score-board";
 
 export const GameLeft = () => {
-  const { currentUser, gameOver, setGameOver } = useContext(AppContext);
+  const {
+    currentUser,
+    gameOver,
+    setGameOver,
+    userScores,
+    newHighScore,
+    setGameOverStatus,
+  } = useContext(AppContext);
 
   //stop the game
   const stopGame = () => {
     setGameOver(true);
+    setGameOverStatus(true);
   };
 
   return (
@@ -23,16 +32,15 @@ export const GameLeft = () => {
           <h3>LEVEL : {mapDifficulty(currentUser.difficulty).toUpperCase()}</h3>
         </div>
       </div>
-      {!gameOver && (
-        <div className="score-board">
-          <div className="text-color title">SCORE BOARD</div>
-          <div className="scores">
-            <li>Game 1 : 1:14</li>
-            <li>Game 1 : 1:14</li>
-          </div>
-        </div>
-      )}
-      <div className="stop" onClick={stopGame}>
+      <GameScoreBoard
+        gameOver={gameOver}
+        userScores={userScores}
+        newHighScore={newHighScore}
+      />
+      <div
+        className="stop"
+        onClick={() => (gameOver ? window.location.assign("/") : stopGame())}
+      >
         <div className="game-left-stop">
           {!gameOver && <img src="/assets/images/close.svg" alt="close" />}
 
