@@ -17,22 +17,17 @@ export const GameCounter = ({ word, difficulty, timer, setTimer }) => {
     setGameOverStatus,
     progress,
     setProgress,
-    pathCovered,
-    setPathCovered,
-    offset,
-    setOffset,
+    fetchWord,
     // newHighScore,
   } = useContext(AppContext);
 
   //set total time for a question
-  const timeForAWord = word && Math.ceil((word.length / difficulty) * 10);
+  const timeForAWord = word && Math.floor((word.length / difficulty) * 10);
   //to control the timer
   useEffect(() => {
-    console.log(timeForAWord);
     let myInterval = setInterval(() => {
       setMicroSeconds(microSeconds + 1);
       setTimer(timer + 1);
-      console.log(Math.floor(timeForAWord));
 
       if (progress <= timeForAWord) setProgress(progress + 1);
 
@@ -61,12 +56,13 @@ export const GameCounter = ({ word, difficulty, timer, setTimer }) => {
           microSeconds < 10 ? "0" + microSeconds : microSeconds
         }`}</div>
       </div> */}
+      (
       {/* <ProgressBar
         progress={progress}
         timeForAWord={timeForAWord}
         seconds={seconds}
         microSeconds={microSeconds}
-        size={300}
+        size={200}
         strokeWidth={30}
         circleOneStroke="#d9edfe"
         circleTwoStroke={"#ff5155"}
@@ -75,7 +71,14 @@ export const GameCounter = ({ word, difficulty, timer, setTimer }) => {
         offset={offset}
         setOffset={setOffset}
       /> */}
-      <Timer timeInSec={timeForAWord / 10} />
+      {!fetchWord && (
+        <Timer
+          timeForAWord={Math.ceil(timeForAWord / 10)}
+          ms={microSeconds}
+          gameOver={setGameOver}
+          gameStatus={setGameOverStatus}
+        />
+      )}
     </>
   );
 };

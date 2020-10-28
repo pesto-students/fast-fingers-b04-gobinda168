@@ -8,8 +8,6 @@ import { GameCounter } from "./game-counter";
 export const GameCenter = () => {
   //to store user's scores
   const {
-    // userScores,
-    // setUserScores,
     currentUser,
     setCurrentUser,
     gameOver,
@@ -22,11 +20,11 @@ export const GameCenter = () => {
     setGameOverStatus,
     setProgress,
     setPathCovered,
-    setOffset,
+    // resetTimer,
+    setResetTimer,
+    fetchWord,
+    setFetchWord,
   } = useContext(AppContext);
-
-  //store the status of fetch
-  const [fetchWord, setFetchWord] = useState(true);
 
   //store the randomly fetched word from the dictionary
   const [fetchedWord, setFetchedWord] = useState(null);
@@ -48,13 +46,20 @@ export const GameCenter = () => {
     const max = newDictionary.length;
 
     const randomWord = Math.floor(Math.random() * Math.floor(max));
-
+    if (newDictionary[randomWord]) {
+      setResetTimer(true);
+      setPathCovered(null);
+      setProgress(0);
+      console.log("inside", newDictionary[randomWord]);
+    }
+    console.log("outside");
     return newDictionary[randomWord].toUpperCase();
   };
 
   //to fetched the random word
   useEffect(() => {
     if (fetchWord) {
+      setResetTimer(false);
       setFetchedWord(getWord);
       setFetchWord(false);
     }
@@ -63,9 +68,7 @@ export const GameCenter = () => {
       fetchedWord &&
       currentLetter.toLowerCase() === fetchedWord.toLowerCase()
     ) {
-      setPathCovered(null);
-      setProgress(0);
-      setOffset(0);
+      setResetTimer(false);
       setFetchWord(true);
       setCurrentLetter(null);
       //   setUserScores([...userScores, userCurrentScore]);
@@ -77,6 +80,7 @@ export const GameCenter = () => {
       setSeconds(0);
       setMicroSeconds(0);
       setTimer(0);
+      setProgress(0);
     }
     // eslint-disable-next-line
   }, [fetchWord, currentLetter]);
@@ -119,6 +123,7 @@ export const GameCenter = () => {
             timer={timer}
             setTimer={setTimer}
           />
+          )
           <div className="game-word">
             {fetchedWord &&
               [...fetchedWord].map((letter, i) => (
@@ -128,6 +133,7 @@ export const GameCenter = () => {
               ))}
           </div>
           <input
+            ref={(input) => input && input.focus()}
             type="text"
             className="word-input"
             value={currentLetter || ""}

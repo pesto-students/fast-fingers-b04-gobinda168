@@ -5,7 +5,7 @@ export const AppHeader = () => {
     <>
       <img
         src="/assets/images/icon-awesome-keyboard.svg"
-        class="Icon-awesome-keyboard"
+        className="Icon-awesome-keyboard"
         alt="keyboard"
       ></img>
       <h1 className="text-color">Fast Fingers </h1>
