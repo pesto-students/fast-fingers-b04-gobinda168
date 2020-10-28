@@ -48,13 +48,13 @@ export const GameCenter = () => {
   useEffect(() => {
     setTimeout(() => {
       setGreetings("Set");
-    }, 2000);
+    }, 1000);
     setTimeout(() => {
       setGreetings("GO");
-    }, 3000);
+    }, 2000);
     setTimeout(() => {
       setGreetings(null);
-    }, 4000);
+    }, 3000);
     return () => {};
   }, []);
   //to fetched the random word
