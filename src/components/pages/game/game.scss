@@ -144,3 +144,62 @@
     }
   }
 }
+@media only screen and (max-width: 450px) {
+  .score-board {
+    display: none;
+  }
+  .stop {
+    > * {
+      font-size: large;
+      text-align: center;
+    }
+    img {
+      display: none;
+    }
+  }
+  .game-word {
+    > h1 {
+      font-size: medium;
+    }
+  }
+
+  .game-page {
+    flex-direction: column;
+    .left {
+      .game-left-header {
+        .player-name,
+        .level {
+          h3 {
+            font-size: medium;
+            // margin-bottom: 50px;
+            margin-block-start: 0.6em;
+          }
+        }
+      }
+    }
+    .right {
+      > * {
+        font-size: medium;
+      }
+    }
+    .center {
+      // .greetings {
+      //   font-size: 50px;
+      // }
+      .game-over {
+        > * {
+          font-size: large;
+          text-transform: uppercase;
+        }
+        img {
+          width: 25px;
+          padding-right: 10px;
+        }
+      }
+      .word-input {
+        width: 65vw;
+        font-size: large;
+      }
+    }
+  }
+}

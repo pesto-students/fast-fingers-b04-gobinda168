@@ -4,8 +4,8 @@
 /* Sets the containers height and width */
 .base-timer {
   position: relative;
-  height: 300px;
-  width: 300px;
+  height: 150px;
+  width: 150px;
 }
 
 /* Removes SVG styling that would hide the time label */
@@ -24,8 +24,8 @@
   position: absolute;
 
   /* Size should match the parent container */
-  width: 300px;
-  height: 300px;
+  width: 150px;
+  height: 150px;
 
   /* Keep the label aligned to the top */
   top: 0;

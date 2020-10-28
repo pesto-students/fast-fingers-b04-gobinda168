@@ -45,3 +45,13 @@
   color: white;
   padding-left: 0.6vw;
 }
+@media only screen and (max-width: 450px) {
+  /* For mobile phones: */
+  .input-field-difficulty {
+    width: 74vw;
+    padding-right: 10px;
+  }
+  .input-field-difficulty .title {
+    font-size: large;
+  }
+}

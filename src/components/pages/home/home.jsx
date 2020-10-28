@@ -8,8 +8,6 @@ import { AppContext } from "../../../context/AppContext";
 // import { useState } from "react";
 export const Home = () => {
   const { currentUser, setCurrentUser } = useContext(AppContext);
-  //   const [name, setName] = useState("");
-  //   const startGame = (e) => {};
 
   return (
     <div className="App">
@@ -24,20 +22,18 @@ export const Home = () => {
       />
 
       <Dropdown />
-      <div
-        className="row start-game"
-        onClick={() =>
-          localStorage.setItem("user", JSON.stringify(currentUser))
-        }
-      >
-        <img src="/assets/images/play.svg" alt="play button" />
+      <Link to={currentUser.name && "/game"} className="">
+        <div
+          className="row start-game"
+          onClick={() =>
+            localStorage.setItem("user", JSON.stringify(currentUser))
+          }
+        >
+          <img src="/assets/images/play.svg" alt="play button" />
 
-        <h1 className="text-color">
-          <Link to={currentUser.name && "/game"} className="start-game-text">
-            START GAME
-          </Link>
-        </h1>
-      </div>
+          <h1 className="text-color start-game-text">START GAME</h1>
+        </div>
+      </Link>
     </div>
   );
 };
