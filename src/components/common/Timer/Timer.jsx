@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
+import { useRef } from "react";
 // import { GameContext } from "../../contexts/context";
 import "./Timer.css";
 
 export const Timer = ({ timeForAWord, gameOver, gameStatus }) => {
   let [timeToBeShown, setTimeToBeShown] = useState(`${timeForAWord}`);
+  const pathRef = useRef();
   const [circleDasharray, setCircleDasharray] = useState(`283`);
   // const [ms, setMs] = useState(0);
   useEffect(() => {
@@ -79,6 +81,7 @@ export const Timer = ({ timeForAWord, gameOver, gameStatus }) => {
               id="base-timer-path-remaining"
               strokeDasharray={circleDasharray}
               className="base-timer__path-remaining"
+              ref={pathRef}
               d="
                   M 50, 50
                   m -45, 0

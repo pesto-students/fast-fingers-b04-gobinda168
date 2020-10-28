@@ -24,7 +24,6 @@ export const GameOver = (props) => {
         <div
           className="play-again"
           onClick={() => {
-            window.history.go(0);
             setNewHighScore(
               gameTimer > newHighScore ? gameTimer : newHighScore
             );

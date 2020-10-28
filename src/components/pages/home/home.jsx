@@ -12,18 +12,29 @@ export const Home = () => {
   const [error, setError] = useState(false);
   return (
     <div className="App">
+      {/* app header */}
       <AppHeader />
+
+      {/* Username input */}
       <input
         placeholder="TYPE YOUR NAME"
         className="input-field-name"
         onChange={(e) => {
+          //store the user input
           setCurrentUser({ ...currentUser, name: e.target.value });
-          setError(false);
+          //update error if its true
+          !error && setError(false);
         }}
         value={currentUser.name}
       />
+
+      {/* display error text */}
       {error && <p style={{ color: "red" }}>Username is Required!!</p>}
+
+      {/* difficulty dropdown */}
       <Dropdown />
+
+      {/* Start game */}
       <Link to={currentUser.name && "/game"} className="">
         <div
           className="row start-game"
