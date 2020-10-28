@@ -1,5 +1,6 @@
 import React from "react";
 import { useContext } from "react";
+import { Link } from "react-router-dom";
 import { AppContext } from "../../../context/AppContext";
 
 export const GameOver = (props) => {
@@ -19,24 +20,28 @@ export const GameOver = (props) => {
       <div className="text-color-white highscore">
         {gameTimer > newHighScore && "New High Score"}
       </div>
-      {/* <Link to="/game"> */}
-      <div
-        className="play-again"
-        onClick={() => {
-          window.history.go(0);
-          setNewHighScore(gameTimer > newHighScore ? gameTimer : newHighScore);
-          localStorage.setItem(
-            "highscore",
-            JSON.stringify(gameTimer > newHighScore ? gameTimer : newHighScore)
-          );
-        }}
-      >
-        <div className="game-center-reload">
-          <img src="/assets/images/reload.svg" alt="close" />
-          <h2>PLAY AGAIN</h2>
+      <Link to="/game" style={{ textDecoration: "none" }}>
+        <div
+          className="play-again"
+          onClick={() => {
+            window.history.go(0);
+            setNewHighScore(
+              gameTimer > newHighScore ? gameTimer : newHighScore
+            );
+            localStorage.setItem(
+              "highscore",
+              JSON.stringify(
+                gameTimer > newHighScore ? gameTimer : newHighScore
+              )
+            );
+          }}
+        >
+          <div className="game-center-reload">
+            <img src="/assets/images/reload.svg" alt="close" />
+            <h2>PLAY AGAIN</h2>
+          </div>
         </div>
-      </div>
-      {/* </Link> */}
+      </Link>
     </div>
   );
 };
