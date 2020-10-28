@@ -6,6 +6,9 @@ import { RightSidebar } from "./right-sidebar";
 export const Game = () => {
   return (
     <div className="game-page">
+      <audio controls autoPlay style={{ display: "none" }}>
+        <source src="/assets/music.mp3" type="audio/mpeg" />
+      </audio>
       <GameLeft />
       <GameCenter />
       <RightSidebar />
