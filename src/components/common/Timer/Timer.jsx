@@ -34,8 +34,6 @@ export const Timer = ({ timeForAWord, gameOver, gameStatus }) => {
     timerInterval = setInterval(() => {
       // The amount of time passed increments by one
       if (timeLeft <= 0) {
-        // gameOver(true);
-        // gameStatus(true);
         clearInterval(timerInterval);
       }
       ms += 1;
@@ -46,8 +44,6 @@ export const Timer = ({ timeForAWord, gameOver, gameStatus }) => {
         ms = 0;
       }
       if (timeLeft <= 0) {
-        // gameOver(true);
-        // gameStatus(true);
         clearInterval(timerInterval);
       }
 

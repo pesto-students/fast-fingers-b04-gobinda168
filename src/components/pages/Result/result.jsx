@@ -7,7 +7,7 @@ export const GameOver = () => {
     AppContext
   );
   return (
-    <div className="game-over">
+    <div className="game-over" style={{ marginTop: "20vh" }}>
       <div className="text-color-white title">
         Score : Game {userScores.length}
       </div>

@@ -18,10 +18,7 @@ export const GameCenter = () => {
     setUserScores,
     gameOverStatus,
     setGameOverStatus,
-    setProgress,
-    setPathCovered,
-    // resetTimer,
-    setResetTimer,
+
     fetchWord,
     setFetchWord,
   } = useContext(AppContext);
@@ -30,10 +27,11 @@ export const GameCenter = () => {
   const [fetchedWord, setFetchedWord] = useState(null);
 
   //stores user input
-  const [currentLetter, setCurrentLetter] = useState(null);
+  const [currentLetter, setCurrentLetter] = useState("");
 
   //calculate total time elapsed
   const [timer, setTimer] = useState(0);
+  const [greetings, setGreetings] = useState("Ready");
 
   //get random word from the dictionary using Math.random()
   const getWord = () => {
@@ -44,22 +42,24 @@ export const GameCenter = () => {
       return word.length > 8;
     });
     const max = newDictionary.length;
-
     const randomWord = Math.floor(Math.random() * Math.floor(max));
-    if (newDictionary[randomWord]) {
-      setResetTimer(true);
-      setPathCovered(null);
-      setProgress(0);
-      console.log("inside", newDictionary[randomWord]);
-    }
-    console.log("outside");
     return newDictionary[randomWord].toUpperCase();
   };
-
+  useEffect(() => {
+    setTimeout(() => {
+      setGreetings("Set");
+    }, 2000);
+    setTimeout(() => {
+      setGreetings("GO");
+    }, 3000);
+    setTimeout(() => {
+      setGreetings(null);
+    }, 4000);
+    return () => {};
+  }, []);
   //to fetched the random word
   useEffect(() => {
     if (fetchWord) {
-      setResetTimer(false);
       setFetchedWord(getWord);
       setFetchWord(false);
     }
@@ -68,11 +68,9 @@ export const GameCenter = () => {
       fetchedWord &&
       currentLetter.toLowerCase() === fetchedWord.toLowerCase()
     ) {
-      setResetTimer(false);
       setFetchWord(true);
-      setCurrentLetter(null);
-      //   setUserScores([...userScores, userCurrentScore]);
-      // setProgress(10);
+      setCurrentLetter("");
+
       setCurrentUser({
         ...currentUser,
         difficulty: currentUser.difficulty + 0.01,
@@ -80,7 +78,6 @@ export const GameCenter = () => {
       setSeconds(0);
       setMicroSeconds(0);
       setTimer(0);
-      setProgress(0);
     }
     // eslint-disable-next-line
   }, [fetchWord, currentLetter]);
@@ -116,30 +113,34 @@ export const GameCenter = () => {
   return (
     <div className="center">
       {!gameOver ? (
-        <>
-          <GameCounter
-            word={fetchedWord}
-            difficulty={currentUser.difficulty}
-            timer={timer}
-            setTimer={setTimer}
-          />
-          )
-          <div className="game-word">
-            {fetchedWord &&
-              [...fetchedWord].map((letter, i) => (
-                <h1 style={{ color: color(i, letter) }} key={i}>
-                  {letter}
-                </h1>
-              ))}
-          </div>
-          <input
-            ref={(input) => input && input.focus()}
-            type="text"
-            className="word-input"
-            value={currentLetter || ""}
-            onChange={(e) => handleWordInput(e)}
-          />
-        </>
+        greetings ? (
+          <h1 style={{ color: "white" }}>{greetings}</h1>
+        ) : (
+          <>
+            <GameCounter
+              word={fetchedWord}
+              difficulty={currentUser.difficulty}
+              timer={timer}
+              setTimer={setTimer}
+            />
+            )
+            <div className="game-word">
+              {fetchedWord &&
+                [...fetchedWord].map((letter, i) => (
+                  <h1 style={{ color: color(i, letter) }} key={i}>
+                    {letter}
+                  </h1>
+                ))}
+            </div>
+            <input
+              ref={(input) => input && input.focus()}
+              type="text"
+              className="word-input"
+              value={currentLetter}
+              onChange={(e) => handleWordInput(e)}
+            />
+          </>
+        )
       ) : (
         <GameOver />
       )}

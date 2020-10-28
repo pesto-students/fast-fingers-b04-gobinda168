@@ -47,19 +47,14 @@ export const AppProvider = (props) => {
   //game timer
   const [gameTimer, setGameTimer] = useState(0);
   const [gameOverStatus, setGameOverStatus] = useState(false);
-  const [progress, setProgress] = useState(0);
-  const [pathCovered, setPathCovered] = useState(null);
-  const [offset, setOffset] = useState(0);
+
   //store the status of fetch
   const [fetchWord, setFetchWord] = useState(true);
-  //timer reset
-  const [resetTimer, setResetTimer] = useState(true);
+
   return (
     <AppContext.Provider
       value={{
         difficultyLevel,
-        resetTimer,
-        setResetTimer,
         fetchWord,
         setFetchWord,
         currentDifficulty,
@@ -82,12 +77,6 @@ export const AppProvider = (props) => {
         setGameTimer,
         gameOverStatus,
         setGameOverStatus,
-        progress,
-        setProgress,
-        pathCovered,
-        setPathCovered,
-        offset,
-        setOffset,
       }}
     >
       {props.children}
