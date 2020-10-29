@@ -1,0 +1,206 @@
+.game-page {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-size: 1.2vw;
+  .left {
+    margin: 2vw;
+  }
+  .game-left-header {
+    > * {
+      display: flex;
+      flex-direction: row;
+      height: 5vh;
+    }
+    .player-name {
+      > * {
+        margin-right: 1vw;
+      }
+    }
+
+    .level {
+      > * {
+        margin-right: 1vw;
+      }
+    }
+    h3,
+    img {
+      margin-top: 2vh;
+    }
+  }
+
+  //center component css style
+  .center {
+    .timer {
+      font-size: xx-large;
+      font-weight: bold;
+    }
+    .game-word {
+      display: flex;
+      flex-direction: row;
+      margin: 0;
+      font-size: xx-large;
+    }
+    .word-input {
+      width: 32vw;
+      height: 7vh;
+      margin: 1.5vw;
+      padding-top: 0.8vh;
+      padding-left: 1vw;
+      opacity: 0.59;
+      border-radius: 15px;
+      box-shadow: 0 3px 16px 0 rgba(0, 0, 0, 0.8);
+      background-color: #ffffff;
+      font-size: 1.3vw;
+      text-transform: uppercase;
+      text-align: center;
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+  // score board css
+  .score-board {
+    border: 2px solid #ff5155;
+    padding: 0.5vw;
+    border-radius: 8px;
+    margin-top: 4vh;
+    .title {
+      text-align: center;
+      padding-bottom: 3vh;
+    }
+    .scores {
+      height: 45vh;
+      overflow-y: scroll;
+      .score {
+        > li {
+          list-style: none;
+          padding-left: 0.4vw;
+          padding-bottom: 0.7vh;
+          color: #fff;
+          opacity: 0.8;
+        }
+      }
+    }
+  }
+
+  .stop {
+    position: absolute;
+    bottom: 0;
+    .game-left-stop {
+      display: flex;
+      flex-direction: row;
+      img {
+        width: 3vw;
+      }
+      > h2 {
+        padding-top: 0vh;
+      }
+    }
+  }
+}
+
+.game-page .right {
+  margin: 2vw;
+}
+.game-page .right > * {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+}
+.game-page .center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 5vh;
+}
+.game-page .center > * {
+  margin: 2vw;
+}
+.game-over {
+  margin-left: 0;
+  .highscore {
+    font-size: 2vw;
+  }
+  .text-color-white {
+    color: white;
+    font-size: 3vw;
+    text-align: center;
+  }
+  .play-again {
+    
+    .game-center-reload {
+      display: flex;
+      flex-direction: row;
+      color: #ff5155;
+      justify-content: center;
+      margin-top: 4vh;
+
+      img {
+        margin-right: 1vw;
+        width: 2vw;
+      }
+    }
+  }
+}
+@media only screen and (max-width: 450px) {
+  .score-board {
+    display: none;
+  }
+  .stop {
+    > * {
+      font-size: large;
+      text-align: center;
+    }
+    img {
+      display: none;
+    }
+  }
+  .game-word {
+    > h1 {
+      font-size: medium;
+    }
+  }
+
+  .game-page {
+    flex-direction: column;
+    .left {
+      .game-left-header {
+        .player-name,
+        .level {
+          h3 {
+            font-size: medium;
+            // margin-bottom: 50px;
+            margin-block-start: 0.6em;
+          }
+        }
+      }
+    }
+    .right {
+      > * {
+        font-size: medium;
+      }
+    }
+    .center {
+      // .greetings {
+      //   font-size: 50px;
+      // }
+      .game-over {
+        > * {
+          font-size: large;
+          text-transform: uppercase;
+        }
+        img {
+          width: 25px;
+          padding-right: 10px;
+        }
+      }
+      .word-input {
+        width: 65vw;
+        font-size: large;
+      }
+    }
+  }
+}
