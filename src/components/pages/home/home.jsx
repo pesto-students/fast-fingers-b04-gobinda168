@@ -23,7 +23,7 @@ export const Home = () => {
           //store the user input
           setCurrentUser({ ...currentUser, name: e.target.value });
           //update error if its true
-          !error && setError(false);
+          error && setError(false);
         }}
         value={currentUser.name}
       />

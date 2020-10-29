@@ -19,7 +19,7 @@ export const Timer = ({ timeForAWord, gameOver, gameStatus }) => {
   let timePassed = 0;
   let timeLeft = TIME_LIMIT;
   let timerInterval = null;
-  let ms = 0;
+  let ms = 10;
 
   function formatTimeLeft(time, ms, gameTimer) {
     // const minutes = Math.floor(time);

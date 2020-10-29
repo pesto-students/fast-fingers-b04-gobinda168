@@ -22,6 +22,11 @@ export const GameLeft = () => {
 
   return (
     <div className="text-color left">
+      {!gameOver && (
+        <audio controls autoPlay style={{ display: "none" }}>
+          <source src="/assets/music.mp3" type="audio/mpeg" />
+        </audio>
+      )}
       <div className="game-left-header">
         <div className="player-name">
           <img src="/assets/images/account.svg" alt="account" width="25vw" />
