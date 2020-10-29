@@ -1,0 +1,57 @@
+.input-field-difficulty {
+  width: 31vw;
+  height: 7vh;
+  padding-top: 1vh;
+  padding-left: 1vw;
+  padding-right: 1vw;
+  opacity: 0.59;
+  border-radius: 15px;
+  box-shadow: 0 3px 16px 0 rgba(0, 0, 0, 0.8);
+  border: solid 1px #ffffff;
+  background-color: transparent;
+  font-size: 1.3vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.input-field-difficulty .title {
+  padding-top: 1vh;
+  font-size: 1.3vw;
+  color: #97a5a7;
+}
+.dropdown-box {
+  display: flex;
+  justify-content: center;
+}
+.dropdown {
+  box-shadow: 0 3px 16px 0 rgba(0, 0, 0, 0.8);
+  width: 31vw;
+  padding-left: 0.5vw;
+  padding-top: 0.6vh;
+  margin-top: 0;
+  padding-bottom: 0.9vh;
+  list-style: none;
+  background-color: white;
+  border-radius: 0px 0px 8px 8px;
+  opacity: 0.59;
+}
+.dropdown li {
+  padding: 0 0 0.6vh 0.6vw;
+}
+.dropdown li:hover {
+  opacity: 0.4;
+  border-radius: 5px;
+  background-color: #053a45;
+  color: white;
+  padding-left: 0.6vw;
+}
+@media only screen and (max-width: 450px) {
+  /* For mobile phones: */
+  .input-field-difficulty {
+    width: 74vw;
+    padding-right: 10px;
+  }
+  .input-field-difficulty .title {
+    font-size: large;
+  }
+}
