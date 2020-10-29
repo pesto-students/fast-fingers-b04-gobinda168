@@ -1,28 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { useRef } from "react";
-// import { GameContext } from "../../contexts/context";
 import "./Timer.css";
 
-export const Timer = ({ timeForAWord, gameOver, gameStatus }) => {
+export const Timer = ({ timeForAWord }) => {
   let [timeToBeShown, setTimeToBeShown] = useState(`${timeForAWord}`);
   const pathRef = useRef();
   const [circleDasharray, setCircleDasharray] = useState(`283`);
-  // const [ms, setMs] = useState(0);
   useEffect(() => {
     startTimer();
-    // return () => clearInterval(ms);
     // eslint-disable-next-line
   }, []);
 
-  const TIME_LIMIT = timeForAWord;
+  const TIME_LIMIT = parseInt(timeForAWord) + 1;
   const FULL_DASH_ARRAY = 283;
   let timePassed = 0;
   let timeLeft = TIME_LIMIT;
   let timerInterval = null;
   let ms = 10;
 
-  function formatTimeLeft(time, ms, gameTimer) {
-    // const minutes = Math.floor(time);
+  function formatTimeLeft(time, ms) {
     let seconds = time;
 
     if (seconds < 10) {

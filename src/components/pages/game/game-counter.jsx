@@ -25,7 +25,7 @@ export const GameCounter = ({ word, difficulty, timer, setTimer }) => {
       setTimer(timer + 1);
 
       //logic to execute after game is over
-      if (timeForAWord === timer) {
+      if (timeForAWord < timer) {
         //ending game
         setGameOver(true);
         setGameOverStatus(true);

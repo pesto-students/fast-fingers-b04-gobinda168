@@ -114,9 +114,12 @@ export const GameCenter = () => {
     <div className="center">
       {!gameOver ? (
         greetings ? (
-          <h1 style={{ color: "white", fontSize: "4vw" }} className="greetings">
+          <div
+            style={{ color: "white", fontSize: "10vw", fontWeight: "bolder" }}
+            className="greetings"
+          >
             {greetings.toUpperCase()}
-          </h1>
+          </div>
         ) : (
           <>
             <GameCounter

@@ -10,7 +10,7 @@ export const GameOver = (props) => {
   return (
     <div className="game-over" style={{ marginTop: "20vh" }}>
       <div className="text-color-white title">
-        Score : Game {userScores.length}
+        SCORE : GAME {userScores.length}
       </div>
       <div className="text-color-white score">{`${
         gameTimer / 10 < 10
